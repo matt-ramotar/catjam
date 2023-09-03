@@ -44,7 +44,7 @@ android {
     }
 
     compileSdk = 34
-    namespace = "com.dropbox.catjam.catjam"
+    namespace = "xyz.ramotar.catjam"
 
     kotlin {
         jvmToolchain(17)

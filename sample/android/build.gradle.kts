@@ -18,7 +18,7 @@ android {
         kotlinCompilerExtensionVersion = "1.4.7"
     }
 
-    namespace = "com.dropbox.catjam.sample.android"
+    namespace = "xyz.ramotar.catjam.sample.android"
 
     kotlin {
         jvmToolchain(17)

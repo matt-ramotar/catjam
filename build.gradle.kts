@@ -22,7 +22,7 @@ allprojects {
         maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 
-    group = "com.dropbox"
+    group = "xyz.ramotar"
     version = "1.0.0-SNAPSHOT"
 }
 
