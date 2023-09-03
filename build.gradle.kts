@@ -11,6 +11,7 @@ buildscript {
         classpath(libs.jetbrains.compose.gradle.plugin)
         classpath(libs.android.gradle.plugin)
         classpath(libs.kotlin.serialization.plugin)
+        classpath(libs.maven.publish.plugin)
     }
 }
 

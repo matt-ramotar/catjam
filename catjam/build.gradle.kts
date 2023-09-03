@@ -1,8 +1,11 @@
+import com.vanniktech.maven.publish.SonatypeHost.S01
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
     kotlin("plugin.serialization")
+    id("com.vanniktech.maven.publish")
 }
 
 kotlin {
@@ -30,7 +33,7 @@ kotlin {
             dependencies {
                 implementation(libs.coil.compose)
                 implementation(libs.coil.core)
-                implementation("io.coil-kt:coil-gif:2.4.0")
+                implementation(libs.coil.gif)
             }
         }
     }
@@ -49,4 +52,9 @@ android {
     kotlin {
         jvmToolchain(17)
     }
+}
+
+mavenPublishing {
+    publishToMavenCentral(S01)
+    signAllPublications()
 }
