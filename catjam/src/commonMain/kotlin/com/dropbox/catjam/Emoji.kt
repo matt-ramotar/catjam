@@ -49,3 +49,12 @@ fun Slackmoji(modifier: Modifier = Modifier, emoji: Slackmoji, onClick: () -> Un
     )
 }
 
+@Composable
+fun Emoji(modifier: Modifier, id: String, onClick: () -> Unit = {}) {
+    val emoji = mapEmojis()[id]
+
+    if (emoji != null) {
+        Emoji(modifier = modifier, emoji = emoji, onClick = onClick)
+    }
+}
+

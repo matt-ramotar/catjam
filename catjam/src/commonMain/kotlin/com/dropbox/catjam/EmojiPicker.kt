@@ -64,6 +64,22 @@ fun EmojiPicker(
     )
 }
 
+@Composable
+internal fun mapEmojis(): Map<String, Emoji> {
+    val nativeEmojis = emojiSetState().value!!.emojis
+    val slackmojis = Slackmoji.values().associate {
+        val name = it.name.lowercase()
+        name to Emoji(
+            id = name,
+            name = name,
+            keywords = listOf(name),
+            skins = listOf(Skin.Local(it)),
+            version = 1
+        )
+    }
+
+    return nativeEmojis + slackmojis
+}
 
 @Composable
 private fun emojiSetState(): State<EmojiSet?> {
