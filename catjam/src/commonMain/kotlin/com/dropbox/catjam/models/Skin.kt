@@ -1,4 +1,4 @@
-package com.dropbox.catjam.ui
+package com.dropbox.catjam.models
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -9,40 +9,6 @@ import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonObject
-
-@Serializable
-enum class CategoryType {
-    Native,
-    Slackmoji,
-    Custom
-}
-
-@Serializable
-data class Category(
-    val id: String,
-    val icon: String? = null,
-    val emojis: List<String>,
-    val type: CategoryType = CategoryType.Native
-)
-
-@Serializable
-data class Emoji(
-    val id: String,
-    val name: String,
-    val keywords: List<String>,
-    val skins: List<Skin>,
-    val emoticons: List<String>? = null,
-    val version: Int
-)
-
-
-@Serializable
-data class Set(
-    val id: String = "CATJAM",
-    val categories: List<Category>,
-    val emojis: Map<String, Emoji>,
-    val aliases: Map<String, String>,
-)
 
 @Serializable(SkinSerializer::class)
 sealed class Skin {
@@ -59,9 +25,10 @@ sealed class Skin {
     data class Local(val slackmoji: Slackmoji) : Skin()
 }
 
+
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = Skin::class)
-object SkinSerializer : KSerializer<Skin> {
+private object SkinSerializer : KSerializer<Skin> {
 
     private val serializer = Json {
         prettyPrint = true

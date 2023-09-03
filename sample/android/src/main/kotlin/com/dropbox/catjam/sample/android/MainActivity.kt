@@ -1,6 +1,5 @@
 package com.dropbox.catjam.sample.android
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,60 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dropbox.catjam.ui.Category
-import com.dropbox.catjam.ui.Emoji
-import com.dropbox.catjam.ui.Picker
-import com.dropbox.catjam.ui.Set
-import com.dropbox.catjam.ui.Skin
-import com.dropbox.catjam.ui.Slackmoji
-import java.io.IOException
+import com.dropbox.catjam.Emoji
+import com.dropbox.catjam.EmojiPicker
+import com.dropbox.catjam.Slackmoji
+import com.dropbox.catjam.models.Emoji
+import com.dropbox.catjam.models.Slackmoji
 
 class MainActivity : AppCompatActivity() {
-
-    private fun loadJson(context: Context, fileName: String): String? {
-        return try {
-            val inputStream = context.assets.open(fileName)
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            String(buffer, Charsets.UTF_8)
-        } catch (error: IOException) {
-            println(error)
-            return null
-        }
-    }
-
-    private val customEmojis = Set(
-        categories = listOf(
-            Category(
-                "slack",
-                emojis = listOf("catjam", "catjam_rainbow")
-            )
-        ),
-        emojis = mutableMapOf<String, Emoji>().apply {
-            put(
-                "catjam", Emoji(
-                    "catjam", "Catjam", listOf("catjam"), skins = listOf(
-                        Skin.Remote("https://emojis.slackmojis.com/emojis/images/1643514974/10003/catjam.gif?1643514974")
-                    ), version = 1
-                )
-            )
-
-            put(
-                "catjam_rainbow", Emoji(
-                    "catjam_rainbow",
-                    "Catjam Rainbow",
-                    listOf("catjam_rainbow"),
-                    skins = listOf(
-                        Skin.Remote("https://emojis.slackmojis.com/emojis/images/1643516952/30079/catjam_rainbow.gif?1643516952")
-                    ),
-                    version = 1
-                )
-            )
-        },
-        aliases = mutableMapOf()
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (showPicker) {
 
-                    Picker(custom = customEmojis) {
+                    EmojiPicker {
                         emoji = it
                         showPicker = false
                     }
@@ -98,11 +50,8 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         Slackmoji(modifier = Modifier.size(64.dp), emoji = Slackmoji.Catjam)
                     }
-
                 }
-
             }
-
         }
     }
 }

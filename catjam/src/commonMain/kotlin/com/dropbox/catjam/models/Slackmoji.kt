@@ -1,4 +1,4 @@
-package com.dropbox.catjam.ui
+package com.dropbox.catjam.models
 
 
 enum class Slackmoji {

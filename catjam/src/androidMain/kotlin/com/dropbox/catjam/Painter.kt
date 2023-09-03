@@ -1,4 +1,4 @@
-package com.dropbox.catjam.ui
+package com.dropbox.catjam
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.runtime.Composable
@@ -9,6 +9,7 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.dropbox.catjam.catjam.R
+import com.dropbox.catjam.models.Slackmoji
 
 @Composable
 actual fun rememberAsyncImagePainter(url: String): Painter {
@@ -37,34 +38,7 @@ actual fun rememberAsyncImagePainter(url: String): Painter {
     return coil.compose.rememberAsyncImagePainter(url, imageLoader)
 }
 
-@Composable
-actual fun rememberImagePainter(slackmoji: Slackmoji): Painter {
-
-    val context = LocalContext.current
-
-    val imageRequest = ImageRequest.Builder(context)
-        .listener(
-            onStart = { request -> println("STARTING = $request") },
-            onError = { _, result -> println("ERROR = $result") },
-            onSuccess = { _, result -> println("SUCCESS = ${result.drawable}") })
-        .data(getDrawableId(slackmoji))
-        .build()
-
-    val imageLoader = ImageLoader.Builder(context)
-        .components {
-            if (SDK_INT >= 28) {
-                add(ImageDecoderDecoder.Factory())
-            } else {
-                add(GifDecoder.Factory())
-            }
-        }
-        .build()
-
-    return coil.compose.rememberAsyncImagePainter(imageRequest, imageLoader = imageLoader)
-}
-
-
-fun getDrawableId(slackmoji: Slackmoji): Int {
+private fun getDrawableId(slackmoji: Slackmoji): Int {
     return when (slackmoji) {
         Slackmoji.ZeroZero -> R.drawable.zero_zero
         Slackmoji.Aaaaaa -> R.drawable.aaaaaa
@@ -256,4 +230,29 @@ fun getDrawableId(slackmoji: Slackmoji): Int {
         Slackmoji.YesChef -> R.drawable.yes_chef
         Slackmoji.Youtube -> R.drawable.youtube
     }
+}
+
+@Composable
+actual fun rememberImagePainter(slackmoji: Slackmoji): Painter {
+    val context = LocalContext.current
+
+    val imageRequest = ImageRequest.Builder(context)
+        .listener(
+            onStart = { request -> println("STARTING = $request") },
+            onError = { _, result -> println("ERROR = $result") },
+            onSuccess = { _, result -> println("SUCCESS = ${result.drawable}") })
+        .data(getDrawableId(slackmoji))
+        .build()
+
+    val imageLoader = ImageLoader.Builder(context)
+        .components {
+            if (SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }
+        .build()
+
+    return coil.compose.rememberAsyncImagePainter(imageRequest, imageLoader = imageLoader)
 }
