@@ -2,13 +2,17 @@ package com.dropbox.catjam
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import coil.ImageLoader
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.dropbox.catjam.catjam.R
+import com.dropbox.catjam.models.Category
+import com.dropbox.catjam.models.CategoryType
 import com.dropbox.catjam.models.Slackmoji
 
 @Composable
@@ -247,4 +251,34 @@ actual fun rememberImagePainter(slackmoji: Slackmoji): Painter {
         .build()
 
     return coil.compose.rememberAsyncImagePainter(imageRequest, imageLoader = imageLoader)
+}
+
+@Composable
+internal actual fun rememberImagePainter(category: Category): Painter {
+    val painter = when (category.type) {
+        CategoryType.Native -> {
+            val resId = when (category.id) {
+                "people" -> R.drawable.laugh_regular
+                "nature" -> R.drawable.dog_solid
+                "foods" -> R.drawable.hamburger_solid
+                "activity" -> R.drawable.skiing_solid
+                "places" -> R.drawable.map_solid
+                "objects" -> R.drawable.lightbulb_regular
+                "symbols" -> R.drawable.icons_solid
+                "flags" -> R.drawable.flag_solid
+                else -> R.drawable.laugh_regular
+            }
+            painterResource(resId)
+        }
+
+        CategoryType.Slackmoji -> {
+            rememberImagePainter(Slackmoji.Catjam)
+        }
+
+        CategoryType.Custom -> {
+            painterResource(R.drawable.palette_solid)
+        }
+    }
+
+    return remember { painter }
 }

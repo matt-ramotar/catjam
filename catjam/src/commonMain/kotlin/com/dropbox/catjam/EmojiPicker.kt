@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -163,12 +164,16 @@ private fun CategoriesRow(
     contentColor: Color,
     onSelect: (Category) -> Unit,
 ) {
-    LazyRow(modifier) {
+    LazyRow(modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         categories.forEach {
             item {
-                TextButton(onClick = { onSelect(it) }) {
-                    Text(it.id, color = if (currentCategory == it) accentColor else contentColor)
-                }
+                CategoryIcon(
+                    modifier = Modifier.clickable { onSelect(it) },
+                    category = it,
+                    isSelected = currentCategory == it,
+                    selectedColor = accentColor,
+                    unselectedColor = contentColor
+                )
             }
         }
     }
@@ -451,4 +456,32 @@ private fun getMinWidth(size: EmojiPickerSize): Dp = when (size) {
     EmojiPickerSize.Small -> 40.dp
     EmojiPickerSize.Medium -> 50.dp
     EmojiPickerSize.Large -> 60.dp
+}
+
+@Composable
+private fun CategoryIcon(
+    modifier: Modifier = Modifier,
+    category: Category,
+    isSelected: Boolean,
+    selectedColor: Color,
+    unselectedColor: Color
+) {
+    val painter = rememberImagePainter(category)
+
+    if (category.type == CategoryType.Slackmoji) {
+        Image(
+            modifier = modifier.size(20.dp),
+            painter = painter,
+            contentDescription = null,
+        )
+    } else {
+        Icon(
+            modifier = modifier.size(20.dp),
+            painter = painter,
+            contentDescription = null,
+            tint = if (isSelected) selectedColor else unselectedColor
+        )
+
+    }
+
 }
