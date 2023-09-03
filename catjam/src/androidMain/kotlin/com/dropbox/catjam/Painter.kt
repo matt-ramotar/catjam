@@ -16,10 +16,6 @@ actual fun rememberAsyncImagePainter(url: String): Painter {
     val context = LocalContext.current
 
     val imageRequest = ImageRequest.Builder(context)
-        .listener(
-            onStart = { request -> println("STARTING = $request") },
-            onError = { _, result -> println("ERROR = $result") },
-            onSuccess = { _, result -> println("SUCCESS = ${result.drawable}") })
         .data(url)
         .build()
 
@@ -237,10 +233,6 @@ actual fun rememberImagePainter(slackmoji: Slackmoji): Painter {
     val context = LocalContext.current
 
     val imageRequest = ImageRequest.Builder(context)
-        .listener(
-            onStart = { request -> println("STARTING = $request") },
-            onError = { _, result -> println("ERROR = $result") },
-            onSuccess = { _, result -> println("SUCCESS = ${result.drawable}") })
         .data(getDrawableId(slackmoji))
         .build()
 
