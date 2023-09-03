@@ -32,14 +32,12 @@ class MainActivity : AppCompatActivity() {
                 mutableStateOf(false)
             }
 
-
             Column {
                 Button(onClick = { showPicker = true }) {
                     Text(text = "Show Picker")
                 }
 
                 if (showPicker) {
-
                     EmojiPicker {
                         emoji = it
                         showPicker = false
