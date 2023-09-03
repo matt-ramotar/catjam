@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="catjam-jvm-1.0.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/catjam/build/libs</output-path>
+    <root id="archive" name="catjam-jvm-1.0.0-SNAPSHOT.jar">
+      <element id="module-output" name="catjam.catjam.jvmMain" />
+    </root>
+  </artifact>
+</component>
