@@ -7,7 +7,7 @@
 ### Android
 
 ```groovy
-implementation "xyz.ramotar.catjam:catjam:0.0.1"
+implementation "xyz.ramotar.catjam:catjam:0.0.2"
 ```
 
 ### Multiplatform (Common, JVM, Native)
@@ -15,7 +15,7 @@ implementation "xyz.ramotar.catjam:catjam:0.0.1"
 ```groovy
 commonMain {
     dependencies {
-        implementation("xyz.ramotar.catjam:catjam:0.0.1")
+        implementation("xyz.ramotar.catjam:catjam:0.0.2")
     }
 }
 ```
