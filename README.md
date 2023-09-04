@@ -7,17 +7,7 @@
 ### Android
 
 ```groovy
-implementation "xyz.ramotar.catjam:catjam:0.0.2"
-```
-
-### Multiplatform (Common, JVM, Native)
-
-```groovy
-commonMain {
-    dependencies {
-        implementation("xyz.ramotar.catjam:catjam:0.0.2")
-    }
-}
+implementation "xyz.ramotar.catjam:catjam:0.0.3"
 ```
 
 ## Using Catjam
@@ -55,20 +45,20 @@ import xyz.ramotar.catjam.models.Slackmoji
 fun CustomEmoji() {
     var emoji: Emoji? by remember { mutableStateOf(null) }
     var showEmojiPicker: Boolean by remember { mutableStateOf(false) }
-    
-    Button(onClick = {showEmojiPicker = true}) {
+
+    Button(onClick = { showEmojiPicker = true }) {
         Text("Show Emoji Picker")
     }
-    
+
     if (showEmojiPicker) {
         EmojiPicker {
             emoji = it
             showEmojiPicker = false
         }
     }
-    
+
     if (emoji != null) {
-        Emoji(emoji)   
+        Emoji(emoji)
     }
 }
 
