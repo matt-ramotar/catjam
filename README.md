@@ -1,5 +1,7 @@
 # Catjam
 
+A Kotlin library for selecting and rendering custom emojis
+
 ![](catjam.gif)
 
 ## Including Catjam
