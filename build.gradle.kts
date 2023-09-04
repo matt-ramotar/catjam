@@ -8,7 +8,6 @@ buildscript {
     }
     dependencies {
         classpath(libs.kotlin.gradle.plugin)
-        classpath(libs.jetbrains.compose.gradle.plugin)
         classpath(libs.android.gradle.plugin)
         classpath(libs.kotlin.serialization.plugin)
         classpath(libs.maven.publish.plugin)
@@ -28,9 +27,7 @@ allprojects {
 }
 
 plugins {
-    kotlin("multiplatform") apply false
     kotlin("android") apply false
     id("com.android.application") apply false
     id("com.android.library") apply false
-    id("org.jetbrains.compose") apply false
 }

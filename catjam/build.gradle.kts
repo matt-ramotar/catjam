@@ -2,7 +2,6 @@ import com.vanniktech.maven.publish.SonatypeHost.S01
 
 plugins {
     kotlin("android")
-    id("org.jetbrains.compose")
     id("com.android.library")
     kotlin("plugin.serialization")
     id("com.vanniktech.maven.publish")
@@ -11,7 +10,7 @@ plugins {
 
 
 dependencies {
-    implementation(compose.material3)
+    api(libs.androidx.compose.material3)
 
     implementation(libs.ktor.client.core)
     implementation(libs.kotlinx.serialization.core)
@@ -32,6 +31,14 @@ android {
 
     defaultConfig {
         minSdk = 24
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
 
     compileSdk = 34

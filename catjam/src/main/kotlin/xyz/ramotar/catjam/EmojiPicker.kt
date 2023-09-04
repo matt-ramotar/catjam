@@ -24,12 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import xyz.ramotar.catjam.models.Category
-import xyz.ramotar.catjam.models.CategoryType
-import xyz.ramotar.catjam.models.Emoji
-import xyz.ramotar.catjam.models.EmojiSet
-import xyz.ramotar.catjam.models.Skin
-import xyz.ramotar.catjam.models.Slackmoji
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -38,6 +32,12 @@ import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.json.Json
+import xyz.ramotar.catjam.models.Category
+import xyz.ramotar.catjam.models.CategoryType
+import xyz.ramotar.catjam.models.Emoji
+import xyz.ramotar.catjam.models.EmojiSet
+import xyz.ramotar.catjam.models.Skin
+import xyz.ramotar.catjam.models.Slackmoji
 
 
 @Composable
@@ -127,7 +127,9 @@ private fun EmojiPicker(
 
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = modifier.background(colors.containerColor).adjustSize(size)
+            modifier = modifier
+                .background(colors.containerColor)
+                .adjustSize(size)
         ) {
             CategoriesRow(
                 categories = categories,
@@ -211,12 +213,15 @@ private fun SearchTextField(
         onValueChange = onValueChange,
         leadingIcon = { Icon(Icons.Default.Search, "Search") },
         placeholder = { Text("Search", color = textColor) },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = containerColor,
+
+        colors = TextFieldDefaults.colors(
+            focusedTextColor = textColor,
+            unfocusedTextColor = textColor,
+            focusedContainerColor = containerColor,
+            unfocusedContainerColor = containerColor,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             unfocusedLabelColor = Color.Transparent,
-            textColor = textColor,
             cursorColor = cursorColor
         ),
         modifier = modifier.fillMaxWidth()
@@ -325,7 +330,9 @@ private fun EmojisGrid(
                     Image(
                         painter,
                         contentDescription = null,
-                        modifier = Modifier.size(minWidth).clickable { onSelect(emoji) }
+                        modifier = Modifier
+                            .size(minWidth)
+                            .clickable { onSelect(emoji) }
                     )
                 }
 
@@ -335,7 +342,9 @@ private fun EmojisGrid(
                     Image(
                         painter,
                         contentDescription = null,
-                        modifier = Modifier.size(minWidth).clickable { onSelect(emoji) }
+                        modifier = Modifier
+                            .size(minWidth)
+                            .clickable { onSelect(emoji) }
                     )
                 }
 
