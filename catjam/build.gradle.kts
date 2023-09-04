@@ -10,7 +10,6 @@ plugins {
 
 kotlin {
     android()
-    jvm()
     ios()
 
     sourceSets {
