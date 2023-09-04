@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import xyz.ramotar.catjam.Emoji
 import xyz.ramotar.catjam.EmojiPicker
-import xyz.ramotar.catjam.Slackmoji
 import xyz.ramotar.catjam.models.Emoji
 import xyz.ramotar.catjam.models.Slackmoji
 
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                     if (emoji != null) {
                         Emoji(modifier = Modifier.size(64.dp), emoji = emoji!!)
                     } else {
-                        Slackmoji(modifier = Modifier.size(64.dp), emoji = Slackmoji.Catjam)
+                        Emoji(modifier = Modifier.size(64.dp), emoji = Slackmoji.Catjam)
                     }
                 }
             }

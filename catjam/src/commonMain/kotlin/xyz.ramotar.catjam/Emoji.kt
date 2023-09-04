@@ -14,7 +14,7 @@ import xyz.ramotar.catjam.models.Slackmoji
 fun Emoji(modifier: Modifier = Modifier, emoji: Emoji, onClick: () -> Unit = {}) {
     when (val skin = emoji.skins.first()) {
         is Skin.Local -> {
-            Slackmoji(modifier, skin.slackmoji, onClick)
+            Emoji(modifier, skin.slackmoji, onClick)
         }
 
         is Skin.Remote -> {
@@ -39,7 +39,7 @@ fun Emoji(modifier: Modifier = Modifier, emoji: Emoji, onClick: () -> Unit = {})
 }
 
 @Composable
-fun Slackmoji(modifier: Modifier = Modifier, emoji: Slackmoji, onClick: () -> Unit = {}) {
+fun Emoji(modifier: Modifier = Modifier, emoji: Slackmoji, onClick: () -> Unit = {}) {
     val painter = rememberImagePainter(emoji)
 
     Image(

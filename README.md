@@ -52,13 +52,31 @@ import xyz.ramotar.catjam.models.Emoji
 import xyz.ramotar.catjam.models.Slackmoji
 
 @Composable
-fun AnyEmoji(emoji: Emoji) {
-    Emoji(emoji)
+fun CustomEmoji() {
+    var emoji: Emoji? by remember { mutableStateOf(null) }
+    var showEmojiPicker: Boolean by remember { mutableStateOf(false) }
+    
+    Button(onClick = {showEmojiPicker = true}) {
+        Text("Show Emoji Picker")
+    }
+    
+    if (showEmojiPicker) {
+        EmojiPicker {
+            emoji = it
+            showEmojiPicker = false
+        }
+    }
+    
+    if (emoji != null) {
+        Emoji(emoji)   
+    }
 }
+
+// or by name
 
 @Composable
 fun Catjam() {
-    Emoji("catjam")
+    Emoji(Slackmoji.Catjam)
 }
 ```
 
