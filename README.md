@@ -7,7 +7,7 @@
 ### Android
 
 ```groovy
-implementation "xyz.ramotar.catjam:catjam:0.0.3"
+implementation "xyz.ramotar.catjam:catjam:0.0.5"
 ```
 
 ## Using Catjam
